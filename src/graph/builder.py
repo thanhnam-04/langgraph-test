@@ -1,5 +1,3 @@
-"""Graph builder module for constructing the chatbot workflow."""
-
 from langgraph.graph import StateGraph, START, END
 
 from src.graph.state import ChatbotState
@@ -36,21 +34,7 @@ def should_retry(state: ChatbotState) -> str:
 
 
 def create_chatbot_graph():
-    """
-    Tạo LangGraph workflow cho chatbot với LOOP (vòng lặp).
-    
-    Flow:
-    START → node1 → node2 → node3 → node4 → router
-                                      ↑         ↓
-                                    node5 ←─ retry
-                                      ↓
-                                    continue
-                                      ↓
-                                    node6 → END
-    
-    Returns:
-        Compiled graph ready for execution
-    """
+   
     # Initialize the graph with ChatbotState
     workflow = StateGraph(ChatbotState)
     
