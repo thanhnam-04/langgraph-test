@@ -20,7 +20,7 @@ def should_retry(state: ChatbotState) -> str:
     """
     needs_retry = state.get("needs_retry", False)
     retry_count = state.get("retry_count", 0)
-    MAX_RETRIES = 2  # Tối đa retry 2 lần
+    MAX_RETRIES = 2 
     
     if needs_retry and retry_count < MAX_RETRIES:
         log_node_execution("ROUTER", f"→ RETRY (lần {retry_count}/{MAX_RETRIES})")

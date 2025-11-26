@@ -6,19 +6,7 @@ from src.utils.helper import log_node_execution
 
 
 def clean_question(state: ChatbotState) -> ChatbotState:
-    """
-    Node 1: Làm sạch câu hỏi từ user.
-    
-    - Loại bỏ khoảng trắng thừa
-    - Chuẩn hóa dấu câu
-    - Loại bỏ ký tự đặc biệt không cần thiết
-    
-    Args:
-        state: Current chatbot state
-        
-    Returns:
-        Updated state with cleaned question
-    """
+
     log_node_execution("CLEAN", "Làm sạch câu hỏi...")
     
     raw_question = state.get("raw_question", "")

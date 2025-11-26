@@ -3,20 +3,10 @@
 import os
 from src.graph.state import ChatbotState
 from src.utils.helper import log_node_execution
+from src.models.llm import get_gemini_model
 
 
 def generate_llm_response(state: ChatbotState) -> ChatbotState:
-    """
-    Node 3: Gọi LLM để sinh câu trả lời.
-    
-    Sử dụng Google Gemini API hoặc rule-based response nếu không có API key.
-    
-    Args:
-        state: Current chatbot state
-        
-    Returns:
-        Updated state with LLM response
-    """
     log_node_execution("LLM", "Tạo câu trả lời...")
     
     question = state.get("cleaned_question", "")

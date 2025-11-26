@@ -5,22 +5,6 @@ from src.utils.helper import log_node_execution
 
 
 def detect_intent(state: ChatbotState) -> ChatbotState:
-    """
-    Node 2: Phát hiện intent của câu hỏi.
-    
-    Intent types:
-    - greeting: Chào hỏi
-    - question: Câu hỏi cần trả lời
-    - help: Yêu cầu trợ giúp
-    - farewell: Tạm biệt
-    - other: Khác
-    
-    Args:
-        state: Current chatbot state
-        
-    Returns:
-        Updated state with detected intent
-    """
     log_node_execution("INTENT", "Phát hiện intent...")
     
     question = state.get("cleaned_question", "").lower()
