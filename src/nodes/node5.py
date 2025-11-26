@@ -3,6 +3,7 @@
 import os
 from src.graph.state import ChatbotState
 from src.utils.helper import log_node_execution
+from src.models.llm import get_gemini_model
 
 
 def retry_generate_response(state: ChatbotState) -> ChatbotState:
@@ -15,17 +16,11 @@ def retry_generate_response(state: ChatbotState) -> ChatbotState:
     intent = state.get("intent", "other")
     retry_count = state.get("retry_count", 1)
     
-    api_key = os.getenv("GOOGLE_API_KEY")
+    # Sử dụng model chung từ src/models/llm.py
+    model = get_gemini_model()
     
-    if api_key:
+    if model:
         try:
-            import google.generativeai as genai
-            genai.configure(api_key=api_key)
-            
-            model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
-            model = genai.GenerativeModel(model_name)
-            
-            # Prompt yêu cầu chi tiết hơn
             enhanced_prompt = f"""
 Bạn là chatbot chuyên nghiệp. Trả lời câu hỏi sau một cách CHI TIẾT, ĐẦY ĐỦ và DỄ HIỂU.
 

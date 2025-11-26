@@ -6,19 +6,7 @@ from src.utils.helper import log_node_execution
 
 
 def format_response(state: ChatbotState) -> ChatbotState:
-    """
-    Node 4: Format lại câu trả lời cuối cùng.
     
-    - Thêm metadata
-    - Format đẹp hơn
-    - Thêm timestamp
-    
-    Args:
-        state: Current chatbot state
-        
-    Returns:
-        Updated state with formatted final answer
-    """
     log_node_execution("FORMAT", "Format câu trả lời...")
     
     llm_response = state.get("llm_response", "")

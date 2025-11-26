@@ -1,5 +1,3 @@
-"""Main entry point for the chatbot application."""
-
 import os
 from dotenv import load_dotenv
 from src.graph.builder import create_chatbot_graph
@@ -10,52 +8,7 @@ from src.utils.helper import log_node_execution
 load_dotenv()
 
 
-def run_chatbot(question: str):
-    """
-    Chạy chatbot với một câu hỏi.
-    
-    Args:
-        question: Câu hỏi từ user
-    """
-    print("\n" + "=" * 62)
-    print("🤖 CHATBOT LANGGRAPH - MULTI-STEP PIPELINE")
-    print("=" * 62)
-    
-    # Initialize the graph
-    log_node_execution("MAIN", "Khởi tạo graph...")
-    graph = create_chatbot_graph()
-    
-    # Define initial state
-    initial_state: ChatbotState = {
-        "raw_question": question,
-        "cleaned_question": None,
-        "intent": None,
-        "llm_response": None,
-        "final_answer": None,
-        "error": None,
-        "needs_retry": False,
-        "retry_count": 0
-    }
-    
-    log_node_execution("MAIN", f"Câu hỏi: '{question}'")
-    print()
-    
-    try:
-        # Execute the graph
-        final_state = graph.invoke(initial_state)
-        
-        # Display final answer
-        print("\n" + final_state.get("final_answer", "Không có câu trả lời"))
-        
-        return final_state
-        
-    except Exception as e:
-        log_node_execution("ERROR", f"Lỗi: {str(e)}")
-        print(f"\n❌ Error: {str(e)}")
-        raise
-
-
-def interactive_mode():
+def chat_mode():
     """Chế độ chat tương tác."""
     print("\n" + "=" * 62)
     print("🤖 CHATBOT INTERACTIVE MODE")
@@ -98,8 +51,7 @@ def interactive_mode():
 
 
 def main():
-    """Main function - Chạy trực tiếp interactive mode."""
-    interactive_mode()
+    chat_mode()
 
 
 if __name__ == "__main__":
